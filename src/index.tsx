@@ -5,7 +5,7 @@ import { store } from "./app/store";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import App from "./app/App";
-import theme from "./theme";
+import theme from "./app/MaterialTheme/index";
 import reportWebVitals from "./reportWebVitals";
 import "./css/index.css";
 
