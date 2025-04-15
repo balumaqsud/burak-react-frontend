@@ -1,7 +1,11 @@
 import React from "react";
 import "../css/app.css";
-
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import HomePage from "./screens/homePage";
+import UsersPage from "./screens/usersPage";
+import ProductsPage from "./screens/productsPage";
+import HelpPage from "./screens/helpPage";
+import OrdersPage from "./screens/ordersPage";
 
 function App() {
   return (
@@ -13,42 +17,40 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/products">Products</Link>
+            </li>
+
+            <li>
+              <Link to="/orders">Orders</Link>
             </li>
             <li>
               <Link to="/users">Users</Link>
             </li>
+            <li>
+              <Link to="/help">Help</Link>
+            </li>
           </ul>
         </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about">
-            <About />
+          <Route path="/orders">
+            <OrdersPage />
           </Route>
           <Route path="/users">
-            <Users />
+            <UsersPage />
+          </Route>
+          <Route path="/products">
+            <ProductsPage />
+          </Route>
+          <Route path="/help">
+            <HelpPage />
           </Route>
           <Route path="/">
-            <Home />
+            <HomePage />
           </Route>
         </Switch>
       </div>
     </Router>
   );
-}
-
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }
 
 export default App;
