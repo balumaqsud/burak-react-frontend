@@ -9,46 +9,44 @@ import OrdersPage from "./screens/ordersPage";
 
 function App() {
   return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/products">Products</Link>
-            </li>
-            <li>
-              <Link to="/orders">Orders</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-            <li>
-              <Link to="/help">Help</Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route path="/orders">
-            <OrdersPage />
-          </Route>
-          <Route path="/users">
-            <UsersPage />
-          </Route>
-          <Route path="/products">
-            <ProductsPage />
-          </Route>
-          <Route path="/help">
-            <HelpPage />
-          </Route>
-          <Route path="/">
-            <HomePage />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/products">Products</Link>
+          </li>
+          <li>
+            <Link to="/orders">Orders</Link>
+          </li>
+          <li>
+            <Link to="/users">Users</Link>
+          </li>
+          <li>
+            <Link to="/help">Help</Link>
+          </li>
+        </ul>
+      </nav>
+      <Switch>
+        <Route path="/orders">
+          <OrdersPage />
+        </Route>
+        <Route path="/users">
+          <UsersPage />
+        </Route>
+        <Route path="/products">
+          <ProductsPage />
+        </Route>
+        <Route path="/help">
+          <HelpPage />
+        </Route>
+        <Route path="/">
+          <HomePage />
+        </Route>
+      </Switch>
+    </div>
   );
 }
 
