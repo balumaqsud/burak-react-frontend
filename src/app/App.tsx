@@ -6,10 +6,11 @@ import ProductsPage from "./screens/productsPage";
 import HelpPage from "./screens/helpPage";
 import OrdersPage from "./screens/ordersPage";
 import Footer from "./components/footer";
-import { OtherNavbar } from "./components/headers/otherNavbar";
-import { HomeNavbar } from "./components/headers/homeNavbar";
+import OtherNavbar from "./components/headers/otherNavbar";
+import HomeNavbar from "./components/headers/homeNavbar";
 import "../css/app.css";
 import "../css/navbar.css";
+import "../css/footer.css";
 
 function App() {
   const location = useLocation();
