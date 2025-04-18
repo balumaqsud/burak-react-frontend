@@ -1,14 +1,15 @@
 import React from "react";
-import "../css/app.css";
-import { Switch, Route, Link, useLocation } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import HomePage from "./screens/homePage";
 import UsersPage from "./screens/usersPage";
 import ProductsPage from "./screens/productsPage";
 import HelpPage from "./screens/helpPage";
 import OrdersPage from "./screens/ordersPage";
-import OtherNavbar from "./components/headers/otherNavbar";
-import HomeNavbar from "./components/headers/homeNavbar";
 import Footer from "./components/footer";
+import { OtherNavbar } from "./components/headers/otherNavbar";
+import { HomeNavbar } from "./components/headers/homeNavbar";
+import "../css/app.css";
+import "../css/navbar.css";
 
 function App() {
   const location = useLocation();

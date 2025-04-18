@@ -1,7 +1,9 @@
-import React from "react";
+import { Container } from "@mui/material";
 
-const OtherNavbar = () => {
-  return <div>otherNavbar</div>;
+export const OtherNavbar = () => {
+  return (
+    <div>
+      <Container></Container>
+    </div>
+  );
 };
-
-export default OtherNavbar;
