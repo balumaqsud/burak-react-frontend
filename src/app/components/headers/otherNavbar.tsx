@@ -3,7 +3,7 @@ import { Container } from "@mui/material";
 export const OtherNavbar = () => {
   return (
     <div>
-      <Container></Container>
+      <Container>other</Container>
     </div>
   );
 };
