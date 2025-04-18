@@ -2,16 +2,11 @@ import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 export function HomeNavbar() {
-  const authMember = null;
+  const authMember = true;
   return (
     <div className="home-navbar">
-      <Container sx={{ mt: "55px", height: "642px" }}>
-        <Stack
-          sx={{ height: "50px" }}
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+      <Container className="navbar-container">
+        <Stack className="menu">
           <Box>
             <NavLink to="/">
               <img
@@ -21,53 +16,49 @@ export function HomeNavbar() {
               />
             </NavLink>
           </Box>
-          <Stack
-            flexDirection="row"
-            justifyContent="space-between"
-            minWidth={"700px"}
-            alignItems="center"
-          >
-            <Box>
+          <Stack className="links">
+            <Box className="hover-line">
               <NavLink to="/" activeClassName="underline">
                 Home
               </NavLink>
             </Box>
-            <Box>
+            <Box className="hover-line">
               <NavLink to="/products" activeClassName="underline">
                 Products
               </NavLink>
             </Box>
             {authMember ? (
-              <Box>
+              <Box className="hover-line">
                 <NavLink to="/orders" activeClassName="underline">
                   Orders
                 </NavLink>
               </Box>
             ) : null}
             {authMember ? (
-              <Box>
+              <Box className="hover-line">
                 <NavLink to="/member-page" activeClassName="underline">
                   My Page
                 </NavLink>
               </Box>
             ) : null}
-            <Box>
+            <Box className="hover-line">
               <NavLink to="/help" activeClassName="underline">
                 Help
               </NavLink>
             </Box>
-            {/* BASKET */}
             {!authMember ? (
               <Box>
-                <Button
-                  variant="contained"
-                  style={{ background: "#3776CC", color: "#f8f8ff" }}
-                >
+                <Button variant="contained" className="login-button">
                   Login
                 </Button>
               </Box>
             ) : (
-              <img />
+              <img
+                className="user-avatar"
+                src={"/icons/default-user.svg"}
+                aria-haspopup={"true"}
+                alt=""
+              />
             )}
           </Stack>
         </Stack>
