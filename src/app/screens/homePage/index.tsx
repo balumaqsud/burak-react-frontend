@@ -5,6 +5,7 @@ import NewDishes from "./PopularDishes copy";
 import Advertisements from "./Advertisements";
 import ActiveUsers from "./ActiveUsers";
 import Events from "./Events";
+import "../../../css/home.css";
 
 const HomePage = () => {
   return (
