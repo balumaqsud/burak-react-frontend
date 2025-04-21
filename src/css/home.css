@@ -63,7 +63,7 @@
   align-items: center;
 }
 
-.homepage .popular-dishes-frame .popular-section .title {
+.homepage .popular-frame .popular-section .title {
   text-align: center;
   font-family: "Roboto Serif";
   font-size: 36px;
@@ -74,7 +74,7 @@
   color: #000;
 }
 
-.homepage .popular-dishes-frame .popular-section .cards-frame {
+.homepage .popular-frame .popular-section .cards-frame {
   width: 100%;
   margin-top: 43px;
   display: flex;
@@ -82,13 +82,13 @@
   justify-content: space-between;
 }
 
-.homepage .popular-dishes-frame .cards-frame .card {
+.homepage .popular-frame .cards-frame .card {
   min-height: 430px;
   min-width: 300px;
   cursor: pointer;
 }
 
-.homepage .popular-dishes-frame .cards-frame .card .card-cover {
+.homepage .popular-frame .cards-frame .card .card-cover {
   background: linear-gradient(
       to top,
       rgba(0, 0, 0, 0.4),
