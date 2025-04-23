@@ -1,5 +1,5 @@
 import React from "react";
-import Statistics from "./statistics";
+import Statistics from "./stats";
 import PopularDishes from "./PopularDishes";
 import NewDishes from "./NewDIshes";
 import Advertisements from "./Advertisements";
