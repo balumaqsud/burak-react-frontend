@@ -23,7 +23,7 @@ const NewDishes = () => {
           <Box className="dishes_title">New Dishes</Box>
           <Stack className="cards-frame">
             <CssVarsProvider>
-              {newDishes.length === 0 ? (
+              {newDishes.length !== 0 ? (
                 newDishes.map((ele, index) => {
                   return (
                     <Card key={index} variant="outlined" className="card">

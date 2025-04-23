@@ -23,7 +23,7 @@ const PopularDishes = () => {
         <Stack className="popular-section">
           <Box className="title">Popular Dishes</Box>
           <Stack className="cards-frame">
-            {list.length === 0 ? (
+            {list.length !== 0 ? (
               list.map((ele, index) => {
                 return (
                   <CssVarsProvider key={index}>
