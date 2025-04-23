@@ -1,0 +1,131 @@
+.products {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.products .avatar-box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+.products .avatar-box .title {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+  font-family: "Roboto Serif";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1.44px;
+  color: #000;
+  margin-left: 300px;
+}
+.products .avatar-box .search {
+  width: 310px;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  gap: -3px;
+  border-radius: 20px;
+}
+
+.products .dishes-filter-section {
+  width: 100%;
+  display: flex;
+  margin-top: 50px;
+}
+
+.products .dishes-filter-section .dishes-filter-box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 18px;
+}
+
+.products .list-category-section {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.products .list-category-section .product-category .category-main {
+  display: flex;
+  flex-direction: column;
+}
+
+/**/
+.products-page .products .restaurant-avatars img {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+}
+
+.products-page .products .restaurant-avatars span {
+  margin-top: 14px;
+  font-family: "Solway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #ffffcf;
+}
+
+.products-page .products .product-wrapper {
+  margin-left: 25px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.products .product-wrapper .no-data {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  font-family: "Poppins";
+  font-style: normal;
+}
+
+.products-page .products .product-img:before {
+  border-radius: 0px 50px 0px 0px;
+  content: "";
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.products-page .products .product-img:hover:before {
+  border-radius: 0px 50px 0px 0px;
+  opacity: 1;
+}
+
+.products-page .products .product-img img {
+  position: absolute;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  z-index: 1;
+}
+
+.products-page .products .shop-btn {
+  position: absolute;
+  padding: 20px;
+  top: 217px;
+  right: 64px;
+}
