@@ -34,12 +34,32 @@ const OrdersPage = () => {
                 </Tabs>
               </Box>
             </Box>
-            <Stack>
+            <Stack className="order-main-content">
               <PausedOrders />
               <ProcessOrders />
               <FinishedOrders />
             </Stack>
           </TabContext>
+        </Stack>
+        <Stack className="order-right">
+          <Box className="order-box-info">
+            <Box className="member-box">
+              <div className="user-image">
+                <img
+                  src={"/icons/default-user.svg"}
+                  alt=""
+                  className={"order-user-avatar"}
+                />
+                <div className="order-user-icon-box">
+                  <img
+                    src={"/icons/user-badge.svg"}
+                    alt=""
+                    className={"order-user-prof-img"}
+                  />
+                </div>
+              </div>
+            </Box>
+          </Box>
         </Stack>
       </Container>
     </div>
