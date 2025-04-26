@@ -63,13 +63,47 @@ const OrdersPage = () => {
                   />
                 </div>
                 <Typography className="user-name">Oliver</Typography>
-                <p>User</p>
-                <Divider />
+                <p className="user-type">User</p>
                 <div className="location">
+                  <LocationOnIcon />
                   <p>does not exist</p>
                 </div>
               </div>
             </Box>
+          </Box>
+          <Box className="user-card-info">
+            <input
+              type="text"
+              placeholder="card number"
+              name="cardNumber"
+              className="cardNumber"
+            ></input>
+            <div>
+              <input
+                type="text"
+                name="cardDate"
+                placeholder="25/07"
+                className="cardDate"
+              />
+              <input
+                type="text"
+                name="CVV"
+                placeholder="CVV"
+                className="cardCVV"
+              />
+            </div>
+            <input
+              type="text"
+              name="cardUser"
+              placeholder="name"
+              className="cardUser"
+            />
+            <div className="card-types-box">
+              <img src={"/icons/western-card.svg"} alt="" />
+              <img src={"/icons/master-card.svg"} alt="" />
+              <img src={"/icons/paypal-card.svg"} alt="" />
+              <img src={"/icons/visa-card.svg"} alt="" />
+            </div>
           </Box>
         </Stack>
       </Container>

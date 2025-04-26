@@ -25,3 +25,38 @@
   display: flex;
   flex-direction: column;
 }
+
+.order-page .order-right .order-box-info {
+  width: 360px;
+  height: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8f8ff;
+  box-shadow:
+    15px 14px 4px rgba(0, 0, 0, 0.25),
+    inset -1px 0px 16px 13px rgb(24 23 112 / 20%);
+  border-radius: 16px;
+  margin-bottom: 25px;
+}
+.order-page .order-right .order-info-box .member-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order-page .order-right .user-card-info {
+  width: 360px;
+  height: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8f8ff;
+  box-shadow:
+    15px 14px 4px rgba(0, 0, 0, 0.25),
+    inset -1px 0px 16px 13px rgb(24 23 112 / 20%);
+  border-radius: 16px;
+  margin-bottom: 25px;
+}
