@@ -47,56 +47,52 @@ const OrdersPage = () => {
             <Box className="member-box">
               <div className="user-image">
                 <img
-                  height={"30px"}
-                  width={"40px"}
                   src={"/icons/default-user.svg"}
                   alt=""
                   className={"order-user-avatar"}
                 />
                 <div className="order-user-icon-box">
                   <img
-                    height={"12px"}
-                    width={"15px"}
                     src={"/icons/user-badge.svg"}
                     alt=""
                     className={"order-user-prof-img"}
                   />
                 </div>
-                <Typography className="user-name">Oliver</Typography>
-                <p className="user-type">User</p>
-                <div className="line"></div>
-                <div className="location">
-                  <LocationOnIcon />
-                  <p>does not exist</p>
-                </div>
+              </div>
+              <Typography className="user-name">Oliver</Typography>
+              <p className="user-type">USER</p>
+              <div className="line"></div>
+              <div className="location">
+                <LocationOnIcon />
+                <p>does not exist</p>
               </div>
             </Box>
           </Box>
           <Box className="user-card-info">
             <input
               type="text"
-              placeholder="card number"
+              placeholder="Card Number"
               name="cardNumber"
               className="cardNumber"
             ></input>
-            <div>
+            <div className="card-second-inputs">
               <input
                 type="text"
                 name="cardDate"
-                placeholder="25/07"
-                className="cardDate"
+                placeholder="Expire date"
+                className="card-second-info"
               />
               <input
                 type="text"
                 name="CVV"
                 placeholder="CVV"
-                className="cardCVV"
+                className="card-second-info"
               />
             </div>
             <input
               type="text"
               name="cardUser"
-              placeholder="name"
+              placeholder="Card Holder's Name"
               className="cardUser"
             />
             <div className="card-types-box">
