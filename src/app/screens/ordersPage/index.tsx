@@ -64,6 +64,7 @@ const OrdersPage = () => {
                 </div>
                 <Typography className="user-name">Oliver</Typography>
                 <p className="user-type">User</p>
+                <div className="line"></div>
                 <div className="location">
                   <LocationOnIcon />
                   <p>does not exist</p>
