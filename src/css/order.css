@@ -1,0 +1,27 @@
+.order-page {
+  width: 100%;
+  height: auto;
+  background: #f8f8ff;
+  display: flex;
+}
+
+.order-page .order-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.order-page .order-left {
+  width: 860px;
+  height: auto;
+}
+
+.order-page .order-right {
+  width: 360px;
+  height: auto;
+  margin-top: 86px;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+}

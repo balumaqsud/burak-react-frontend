@@ -7,7 +7,7 @@ import TabPanel from "@mui/lab/TabPanel";
 const FinishedOrders = () => {
   const example_arr: any[] = [1, 2];
   return (
-    <TabPanel value="2">
+    <TabPanel value="3">
       <Stack>
         {example_arr.map((ele, index) => {
           return (

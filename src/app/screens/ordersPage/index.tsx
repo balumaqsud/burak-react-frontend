@@ -1,4 +1,4 @@
-import { Container, Stack, Box } from "@mui/material";
+import { Container, Stack, Box, Typography } from "@mui/material";
 import { useState, SyntheticEvent } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -9,6 +9,7 @@ import FinishedOrders from "./FinishedOrders";
 import ProcessOrders from "./ProcessOrders";
 import React from "react";
 import "../../../css/order.css";
+import Divider from "../../components/divider";
 
 const OrdersPage = () => {
   const [value, setValue] = useState("1");
@@ -17,7 +18,7 @@ const OrdersPage = () => {
   };
   return (
     <div className="order-page">
-      <Container>
+      <Container className="order-container">
         <Stack className="order-left">
           <TabContext value={value}>
             <Box className="order-nav-frame">
@@ -46,16 +47,26 @@ const OrdersPage = () => {
             <Box className="member-box">
               <div className="user-image">
                 <img
+                  height={"30px"}
+                  width={"40px"}
                   src={"/icons/default-user.svg"}
                   alt=""
                   className={"order-user-avatar"}
                 />
                 <div className="order-user-icon-box">
                   <img
+                    height={"12px"}
+                    width={"15px"}
                     src={"/icons/user-badge.svg"}
                     alt=""
                     className={"order-user-prof-img"}
                   />
+                </div>
+                <Typography className="user-name">Oliver</Typography>
+                <p>User</p>
+                <Divider />
+                <div className="location">
+                  <p>does not exist</p>
                 </div>
               </div>
             </Box>

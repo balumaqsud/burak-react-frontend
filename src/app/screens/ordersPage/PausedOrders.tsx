@@ -5,7 +5,7 @@ import React from "react";
 const PausedOrders = () => {
   const example_arr: any[] = [1, 2];
   return (
-    <TabPanel value="2">
+    <TabPanel value="1">
       <Stack>
         {example_arr.map((ele, index) => {
           return (
@@ -16,6 +16,8 @@ const PausedOrders = () => {
                     <Box key={index2} className="orders-name-price">
                       <img
                         src="/img/kebab.webp"
+                        height={"40px"}
+                        width={"30px"}
                         className="order-dish-img"
                         alt="dish"
                       />
