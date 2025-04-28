@@ -15,6 +15,7 @@
 .order-page .order-left {
   width: 860px;
   height: auto;
+  margin-top: 9px;
 }
 
 .order-page .order-right {
@@ -48,8 +49,8 @@
 }
 
 .order-page .order-right .member-box .user-image .order-user-avatar {
-  width: 114px;
-  height: 114px;
+  width: 112px;
+  height: 112px;
   margin-top: 10px;
 }
 
