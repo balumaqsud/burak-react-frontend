@@ -9,7 +9,6 @@ import FinishedOrders from "./FinishedOrders";
 import ProcessOrders from "./ProcessOrders";
 import React from "react";
 import "../../../css/order.css";
-import Divider from "../../components/divider";
 
 const OrdersPage = () => {
   const [value, setValue] = useState("1");
