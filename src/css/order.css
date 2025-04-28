@@ -57,6 +57,13 @@
   display: flex;
   justify-content: end;
   align-items: end;
+  position: absolute;
+  border: 1px;
+  border-radius: 50px;
+  padding: 2px;
+  background-color: #d3d1d1;
+  right: 310px;
+  top: 660px;
 }
 
 .order-page .order-right .member-box .user-name {

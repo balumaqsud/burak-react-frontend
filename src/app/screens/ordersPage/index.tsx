@@ -64,7 +64,7 @@ const OrdersPage = () => {
               <div className="line"></div>
               <div className="location">
                 <LocationOnIcon />
-                <p>does not exist</p>
+                <p>Yeosu, South Korea</p>
               </div>
             </Box>
           </Box>

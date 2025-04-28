@@ -21,7 +21,7 @@ const FinishedOrders = () => {
                         className="order-dish-img"
                         alt="dish"
                       />
-                      <p className="title-dish">Kebab</p>
+                      <div className="dish-title">Kebab</div>
                       <Box className="price-box">
                         <p>$11</p>
                         <img src="/icons/close.svg" alt="close" />
