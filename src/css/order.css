@@ -47,24 +47,32 @@
   flex-direction: column;
   align-items: center;
 }
+.order-page .order-right .member-box .user-image {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
 .order-page .order-right .member-box .user-image .order-user-avatar {
   width: 112px;
   height: 112px;
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .order-page .order-right .member-box .order-user-icon-box {
-  display: flex;
-  justify-content: end;
-  align-items: end;
   position: absolute;
-  border: 1px;
-  border-radius: 50px;
-  padding: 2px;
-  background-color: #d3d1d1;
-  right: 310px;
-  top: 660px;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  top: 80%;
+  right: 0;
+  display: flex;
+  background: rgba(0, 0, 0, 0.33);
+  border-radius: 50%;
 }
 
 .order-page .order-right .member-box .user-name {
