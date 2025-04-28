@@ -33,6 +33,16 @@ const FinishedOrders = () => {
                   );
                 })}
               </Box>
+              <Box className="total-price">
+                <p>Product Price</p>
+                <p>$44</p>
+                <img src="/icons/plus.svg" alt="plus" />
+                <p>Delivery Cost</p>
+                <p>$5</p>
+                <img src="/icons/pause.svg" alt="pause" />
+                <p>Total</p>
+                <p>$49</p>
+              </Box>
             </Box>
           );
         })}

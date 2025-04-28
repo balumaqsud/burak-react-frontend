@@ -1,9 +1,10 @@
 import React from "react";
 import TabPanel from "@mui/lab/TabPanel";
-import { Box, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
+import moment from "moment";
 
 const ProcessOrders = () => {
-  const example_arr: any[] = [1, 2, 3];
+  const example_arr: any[] = [1, 2];
   return (
     <TabPanel value="2">
       <Stack>
@@ -30,6 +31,20 @@ const ProcessOrders = () => {
                     </Box>
                   );
                 })}
+              </Box>
+              <Box className="total-price">
+                <p>Product Price</p>
+                <p>$44</p>
+                <img src="/icons/plus.svg" alt="plus" />
+                <p>Delivery Cost</p>
+                <p>$5</p>
+                <img src="/icons/pause.svg" alt="pause" />
+                <p>Total</p>
+                <p>$49</p>
+                <div className="moment">{moment().format("lll")}</div>
+                <Box className="process-button">
+                  <Button className="fulfill-button">Verify Fulfillment</Button>
+                </Box>
               </Box>
             </Box>
           );

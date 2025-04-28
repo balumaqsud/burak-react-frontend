@@ -215,3 +215,11 @@
   font-weight: bold;
   color: white;
 }
+
+.order-main-box .total-price .process-button .fulfill-button {
+  background-color: rgb(184, 184, 234);
+}
+
+.order-main-box .total-price .moment {
+  font-size: 12px;
+}
