@@ -1,5 +1,5 @@
 import TabPanel from "@mui/lab/TabPanel";
-import { Box, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import React from "react";
 
 const PausedOrders = () => {
@@ -21,7 +21,7 @@ const PausedOrders = () => {
                         className="order-dish-img"
                         alt="dish"
                       />
-                      <p className="dish-title">Kebab</p>
+                      <div className="dish-title">Kebab</div>
 
                       <Box className="price-box">
                         <p>$11</p>
@@ -33,6 +33,20 @@ const PausedOrders = () => {
                     </Box>
                   );
                 })}
+              </Box>
+              <Box className="total-price">
+                <p>Product Price</p>
+                <p>$44</p>
+                <img src="/icons/plus.svg" alt="plus" />
+                <p>Delivery Cost</p>
+                <p>$5</p>
+                <img src="/icons/pause.svg" alt="pause" />
+                <p>Total</p>
+                <p>$49</p>
+                <Box className="buttons">
+                  <Button className="cancel-button">Cancel</Button>
+                  <Button className="payment-button">Payment</Button>
+                </Box>
               </Box>
             </Box>
           );
