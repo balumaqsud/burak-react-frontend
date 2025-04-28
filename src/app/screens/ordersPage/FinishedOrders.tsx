@@ -1,7 +1,5 @@
 import React from "react";
 import { Box, Stack } from "@mui/material";
-import Button from "@mui/material/Button";
-import moment from "moment";
 import TabPanel from "@mui/lab/TabPanel";
 
 const FinishedOrders = () => {
@@ -46,6 +44,15 @@ const FinishedOrders = () => {
             </Box>
           );
         })}
+        {false && (
+          <Box display={"flex"} flexDirection={"row"} justifyContent={"center"}>
+            <img
+              src={"/icons/noimage-list.svg"}
+              style={{ width: 300, height: 300 }}
+              alt=""
+            />
+          </Box>
+        )}
       </Stack>
     </TabPanel>
   );
