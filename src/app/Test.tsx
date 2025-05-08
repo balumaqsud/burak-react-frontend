@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 
 type State = {
@@ -25,7 +26,7 @@ class Test extends React.Component<{}, State> {
     });
   };
 
-  //is invoked immediately after a component is mounted (inserted into the tree).
+  //is invoked immediately after a component is mounted  (retrieve data from backend)
   componentDidMount() {
     console.log("component did mount");
   }
