@@ -14,7 +14,7 @@ import { setPopularDishes } from "./slice";
 import { retrievePopularDishes } from "./selector.ts";
 import { Product } from "../../../lib/types/product";
 
-/** REDUX SLICE & SELECTOR */
+//REDUX SLICE & SELECTOR
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
 });
