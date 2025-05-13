@@ -37,7 +37,6 @@ const HomePage = () => {
       page: 1,
       limit: 4,
       order: "productViews",
-      productCollection: ProductCollection.DISH,
     })
     .then((data) => {
       console.log("came here:", data);
