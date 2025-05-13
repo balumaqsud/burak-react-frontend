@@ -13,6 +13,7 @@ import { createSelector } from "reselect";
 import { setPopularDishes } from "./slice";
 import { retrievePopularDishes } from "./selector.ts";
 import { Product } from "../../../lib/types/product";
+import ProductSerivce from "../../services/ProductService";
 
 //REDUX SLICE & SELECTOR
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -28,6 +29,8 @@ const HomePage = () => {
   //selector: store => data
   const { setPopularDishes } = actionDispatch(useDispatch());
   const { popularDishes } = useSelector(popularDishesRetriever);
+
+  const productService = new ProductSerivce();
 
   useEffect(() => {
     //Backend server data request = Data
