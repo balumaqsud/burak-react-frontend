@@ -13,7 +13,8 @@ import { createSelector } from "reselect";
 import { setPopularDishes } from "./slice";
 import { retrievePopularDishes } from "./selector.ts";
 import { Product } from "../../../lib/types/product";
-import ProductSerivce from "../../services/ProductService";
+import ProductService from "../../services/ProductService";
+import { ProductCollection } from "../../../lib/data/enums/product.enum";
 
 //REDUX SLICE & SELECTOR
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -30,7 +31,19 @@ const HomePage = () => {
   const { setPopularDishes } = actionDispatch(useDispatch());
   const { popularDishes } = useSelector(popularDishesRetriever);
 
-  const productService = new ProductSerivce();
+  const products = new ProductService();
+  products
+    .getProducts({
+      page: 1,
+      limit: 4,
+      order: "productViews",
+      productCollection: ProductCollection.DISH,
+    })
+    .then((data) => {
+      console.log("came here:", data);
+      setPopularDishes(data);
+    })
+    .catch((err) => console.log(err));
 
   useEffect(() => {
     //Backend server data request = Data
