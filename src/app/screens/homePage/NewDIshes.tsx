@@ -34,7 +34,7 @@ const NewDishes = () => {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
                   const productSize =
                     product.productCollection === "DRINK"
-                      ? product.productVolume + "L"
+                      ? product.productVolume + " L"
                       : product.productSize + " SIZE";
                   return (
                     <Card key={product._id} variant="outlined" className="card">
