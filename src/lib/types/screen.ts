@@ -7,13 +7,19 @@ import { Product } from "./product";
 
 // homepage
 export interface AppRootState {
-  homepage: HomePageState;
+  homePage: HomePageState;
+  productsPage: ProductsPageState;
 }
 
 export interface HomePageState {
   popularDishes: Product[];
   newDishes: Product[];
   topUsers: Member[];
+}
+export interface ProductsPageState {
+  restaurant: Member | null;
+  chosenProduct: Product | null;
+  products: Product[];
 }
 
 // products
