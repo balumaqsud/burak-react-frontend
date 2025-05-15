@@ -24,7 +24,6 @@ const actionDispatch = (dispatch: Dispatch) => ({
 });
 
 const HomePage = () => {
-  //selector: store => data
   const { setPopularDishes, setNewDishes, setTopUsers } =
     actionDispatch(useDispatch());
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
@@ -10,18 +10,46 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Input from "@mui/joy/Input";
 import { CssVarsProvider } from "@mui/joy";
+import { setProducts } from "./slice";
+import { Dispatch } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+import ProductService from "../../services/ProductService";
+import { serverApi } from "../../../lib/config";
+import { retrieveProducts } from "./selector";
+import { Product } from "../../../lib/types/product";
+import { createSelector } from "reselect";
 
-const products = [
-  { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-  { productName: "Kebab", imagePath: "/img/kebab-fresh.webp" },
-  { productName: "Kebab", imagePath: "/img/kebab.webp" },
-  { productName: "Lavash", imagePath: "/img/lavash.webp" },
-  { productName: "Lavash", imagePath: "/img/lavash.webp" },
-  { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-  { productName: "Kebab", imagePath: "/img/kebab.webp" },
-  { productName: "Kebab", imagePath: "/img/kebab-fresh.webp" },
-];
+//REDUX SLICE
+const actionDispatch = (dispatch: Dispatch) => ({
+  setProducts: (data: Product[]) => dispatch(setProducts(data)),
+});
+//selector
+const productsRetriever = createSelector(retrieveProducts, (products) => ({
+  products,
+}));
+
 const Products = () => {
+  const { setProducts } = actionDispatch(useDispatch());
+  const { products } = useSelector(productsRetriever);
+
+  useEffect(() => {
+    const products = new ProductService();
+
+    products
+      .getProducts({
+        page: 1,
+        limit: 8,
+        order: "createdAt",
+        // productCollection: ProductCollection.DISH,
+      })
+      .then((data) => {
+        console.log("products data:", data);
+        setProducts(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  //
+
   return (
     <div className="products">
       <Container>
@@ -74,11 +102,12 @@ const Products = () => {
             <Stack className="products-wrapper">
               {products.length !== 0 ? (
                 products.map((product, index) => {
+                  const imagePath = `${serverApi}/${product.productImages[0]}`;
                   return (
                     <Stack key={index} className="product-card">
                       <Stack
                         className="product-img"
-                        sx={{ backgroundImage: `url(${product.imagePath})` }}
+                        sx={{ backgroundImage: `url(${imagePath})` }}
                       >
                         <div className="product-sale">Normal size</div>
                         <Button className="shop-btn">
@@ -92,7 +121,7 @@ const Products = () => {
                           <Badge badgeContent={20} color="secondary">
                             <RemoveRedEyeIcon
                               sx={{
-                                color: 20 ? "gray" : "white",
+                                color: "gray",
                               }}
                             />
                           </Badge>

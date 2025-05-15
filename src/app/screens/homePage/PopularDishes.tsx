@@ -80,7 +80,7 @@ const PopularDishes = () => {
                       >
                         <Typography
                           startDecorator={<DescriptionOutlinedIcon />}
-                          textColor="neutral.300"
+                          textColor="neutral.100"
                         >
                           {product.productDesc}
                         </Typography>
