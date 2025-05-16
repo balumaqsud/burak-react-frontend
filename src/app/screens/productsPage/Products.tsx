@@ -148,13 +148,13 @@ const Products = () => {
               <Button
                 variant="contained"
                 color={
-                  productSearch.order === "productViews"
+                  productSearch.order === "productView"
                     ? "primary"
                     : "secondary"
                 }
                 className="order"
                 onClick={() => {
-                  productOrderHandler("productViews");
+                  productOrderHandler("productView");
                 }}
               >
                 Views
