@@ -99,6 +99,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .products .product-wrapper .no-data {
@@ -400,7 +401,7 @@
   color: #000000;
 }
 
-.products-page .chosen-product .info-box .resto-name {
+.products-page .chosen-product .info-box .restaurant-name {
   margin-top: 16px;
   font-family: "Poppins";
   font-style: normal;

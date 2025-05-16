@@ -14,6 +14,7 @@ import { createSelector } from "reselect";
 import { retrieveNewDishes } from "./selector";
 import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
+import { useHistory } from "react-router-dom";
 
 const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
   newDishes,
@@ -21,6 +22,13 @@ const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
 
 const NewDishes = () => {
   const { newDishes } = useSelector(newDishesRetriever);
+
+  const history = useHistory();
+
+  //chosen product detail page
+  const chosenProductHandler = (id: string) => {
+    history.push(`/products/${id}`);
+  };
 
   return (
     <div className="new-products-frame">
@@ -37,7 +45,12 @@ const NewDishes = () => {
                       ? product.productVolume + " L"
                       : product.productSize + " SIZE";
                   return (
-                    <Card key={product._id} variant="outlined" className="card">
+                    <Card
+                      key={product._id}
+                      variant="outlined"
+                      className="card"
+                      onClick={() => chosenProductHandler(product._id)}
+                    >
                       <CardOverflow>
                         <div className="product-sale">{productSize}</div>
                         <AspectRatio ratio="1">

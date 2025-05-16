@@ -8,6 +8,7 @@ import Typography from "@mui/joy/Typography";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import { CardOverflow } from "@mui/joy";
+import { useHistory } from "react-router-dom";
 
 //for redux
 import { useSelector } from "react-redux";
@@ -24,6 +25,13 @@ const popularDishesRetriever = createSelector(
 const PopularDishes = () => {
   const { popularDishes } = useSelector(popularDishesRetriever);
   console.log("pops", popularDishes);
+
+  const history = useHistory();
+
+  //chosen product detail page
+  const chosenProductHandler = (id: string) => {
+    history.push(`/products/${id}`);
+  };
   return (
     <div className="popular-frame">
       <Container>
@@ -35,7 +43,10 @@ const PopularDishes = () => {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
                 return (
                   <CssVarsProvider key={product._id}>
-                    <Card className="card">
+                    <Card
+                      className="card"
+                      onClick={() => chosenProductHandler(product._id)}
+                    >
                       <CardCover>
                         <img src={imagePath} alt="" />
                       </CardCover>

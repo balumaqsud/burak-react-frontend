@@ -101,7 +101,9 @@ export default function ChosenProduct() {
             <strong className={"product-name"}>
               {chosenProduct?.productName}
             </strong>
-            <span className={"resto-name"}>{restaurant?.memberNick}</span>
+            <span className={"restaurant-name"}>
+              {restaurant?.memberNick}: {restaurant?.memberPhone}
+            </span>
             <Box className={"rating-box"}>
               <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
               <div className={"evaluation-box"}>
