@@ -8,7 +8,7 @@ const ProductsPage = () => {
   return (
     <div className="products-page">
       <Switch>
-        <Route path={`${products.path}/:productID`}>
+        <Route path={`${products.path}/:productId`}>
           <ChosenProduct />
         </Route>
         <Route path={`${products.path}`}>

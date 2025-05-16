@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Stack, Box } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
@@ -16,11 +16,16 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { retrieveChosenProduct, retrieveRestaurant } from "./selector";
 import { createSelector } from "reselect";
 import { useDispatch, useSelector } from "react-redux";
+import ProductService from "../../services/ProductService";
+import MemberService from "../../services/MemberService";
+import { useParams } from "react-router-dom";
+import { Member } from "../../../lib/types/member";
+import { serverApi } from "../../../lib/config";
 
 //REDUX SLICE define
 const actionDispatch = (dispatch: Dispatch) => ({
-  setRestaurant: (data: Product[]) => dispatch(setRestaurant(data)),
-  setChosenProduct: (data: Product[]) => dispatch(setChosenProduct(data)),
+  setRestaurant: (data: Member) => dispatch(setRestaurant(data)),
+  setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
 });
 //selector define
 const restaurantRetriever = createSelector(
@@ -37,13 +42,35 @@ const chosenProductRetriever = createSelector(
 );
 
 export default function ChosenProduct() {
+  const { productId } = useParams<{ productId: string }>();
+  console.log("here", productId);
   //slice call, sets the redux data
-  const { setRestaurant } = actionDispatch(useDispatch());
-  const { setChosenProduct } = actionDispatch(useDispatch());
+  const { setRestaurant, setChosenProduct } = actionDispatch(useDispatch());
+
+  // setting data for redux
+  useEffect(() => {
+    const product = new ProductService();
+    const member = new MemberService();
+
+    product
+      .getProduct(productId)
+      .then((data) => {
+        setChosenProduct(data);
+      })
+      .catch((err) => console.log(err));
+    member
+      .getRestaurant()
+      .then((data) => {
+        setRestaurant(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   //selector call, gets the redux data
   const { restaurant } = useSelector(restaurantRetriever);
   const { chosenProduct } = useSelector(chosenProductRetriever);
+  console.log(restaurant);
+
   return (
     <div className={"chosen-product"}>
       <Box className={"title"}>Product Detail</Box>
@@ -56,35 +83,39 @@ export default function ChosenProduct() {
             modules={[FreeMode, Navigation, Thumbs]}
             className="swiper-area"
           >
-            {["/img/cutlet.webp", "/img/kebab-fresh.webp"].map(
-              (ele: string, index: number) => {
-                return (
-                  <SwiperSlide key={index}>
-                    <img className="slider-image" src={ele} alt="" />
-                  </SwiperSlide>
-                );
-              }
-            )}
+            {chosenProduct?.productImages.map((ele: string, index: number) => {
+              return (
+                <SwiperSlide key={index}>
+                  <img
+                    className="slider-image"
+                    src={`${serverApi}/${ele}`}
+                    alt=""
+                  />
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
         </Stack>
         <Stack className={"chosen-product-info"}>
           <Box className={"info-box"}>
-            <strong className={"product-name"}>Kebab</strong>
-            <span className={"resto-name"}>Burak</span>
+            <strong className={"product-name"}>
+              {chosenProduct?.productName}
+            </strong>
+            <span className={"resto-name"}>{restaurant?.memberNick}</span>
             <Box className={"rating-box"}>
               <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
               <div className={"evaluation-box"}>
                 <div className={"product-view"}>
                   <RemoveRedEyeIcon sx={{ mr: "10px" }} />
-                  <span>20</span>
+                  <span>{chosenProduct?.productView}</span>
                 </div>
               </div>
             </Box>
-            <p className={"product-desc"}>Our best product</p>
+            <p className={"product-desc"}>{chosenProduct?.productDesc}</p>
             <Divider height="1" width="100%" bg="#000000" />
             <div className={"product-price"}>
               <span>Price:</span>
-              <span>$12</span>
+              <span>${chosenProduct?.productPrice}</span>
             </div>
             <div className={"button-box"}>
               <Button variant="contained">Add To Basket</Button>
