@@ -15,13 +15,14 @@ import { Product } from "../../../lib/types/product";
 import { Dispatch } from "@reduxjs/toolkit";
 import { retrieveChosenProduct, retrieveRestaurant } from "./selector";
 import { createSelector } from "reselect";
+import { useDispatch, useSelector } from "react-redux";
 
-//REDUX SLICE
+//REDUX SLICE define
 const actionDispatch = (dispatch: Dispatch) => ({
   setRestaurant: (data: Product[]) => dispatch(setRestaurant(data)),
   setChosenProduct: (data: Product[]) => dispatch(setChosenProduct(data)),
 });
-//selector
+//selector define
 const restaurantRetriever = createSelector(
   retrieveRestaurant,
   (restaurant) => ({
@@ -36,6 +37,13 @@ const chosenProductRetriever = createSelector(
 );
 
 export default function ChosenProduct() {
+  //slice call, sets the redux data
+  const { setRestaurant } = actionDispatch(useDispatch());
+  const { setChosenProduct } = actionDispatch(useDispatch());
+
+  //selector call, gets the redux data
+  const { restaurant } = useSelector(restaurantRetriever);
+  const { chosenProduct } = useSelector(chosenProductRetriever);
   return (
     <div className={"chosen-product"}>
       <Box className={"title"}>Product Detail</Box>
