@@ -500,3 +500,15 @@
   line-height: 43px;
   margin-top: 40px;
 }
+
+.products-wrapper .no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+}

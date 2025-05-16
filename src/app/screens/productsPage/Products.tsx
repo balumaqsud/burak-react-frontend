@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProductService from "../../services/ProductService";
 import { serverApi } from "../../../lib/config";
 import { retrieveProducts } from "./selector";
-import { Product } from "../../../lib/types/product";
+import { Product, ProductInquiry } from "../../../lib/types/product";
 import { createSelector } from "reselect";
 import { ProductCollection } from "../../../lib/data/enums/product.enum";
 
@@ -32,25 +32,30 @@ const productsRetriever = createSelector(retrieveProducts, (products) => ({
 const Products = () => {
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useSelector(productsRetriever);
+  const [productSearch, setProductSearch] = useState({
+    page: 1,
+    limit: 8,
+    order: "createdAt",
+    productCollection: ProductCollection.DISH,
+    search: "",
+  });
 
   useEffect(() => {
     const products = new ProductService();
-
     products
-      .getProducts({
-        page: 1,
-        limit: 8,
-        order: "createdAt",
-        productCollection: ProductCollection.DISH,
-        search: "",
-      })
+      .getProducts(productSearch)
       .then((data) => {
-        console.log("products data:", data);
         setProducts(data);
       })
       .catch((err) => console.log(err));
-  }, []);
-  //
+  }, [productSearch]);
+
+  //handlers
+  const productSortHandler = (collection: ProductCollection) => {
+    productSearch.page = 1;
+    productSearch.productCollection = collection;
+    setProductSearch({ ...productSearch });
+  };
 
   return (
     <div className="products">
@@ -84,19 +89,49 @@ const Products = () => {
           <Stack className="list-category-section">
             <Stack className="product-category">
               <div className="category-main">
-                <Button variant="contained" color="secondary">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    productSortHandler(ProductCollection.OTHER);
+                  }}
+                >
                   Other
                 </Button>
-                <Button variant="contained" color="secondary">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    productSortHandler(ProductCollection.DESSERT);
+                  }}
+                >
                   Dessert
                 </Button>
-                <Button variant="contained" color="secondary">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    productSortHandler(ProductCollection.DRINK);
+                  }}
+                >
                   Drink
                 </Button>
-                <Button variant="contained" color="secondary">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    productSortHandler(ProductCollection.SALAD);
+                  }}
+                >
                   Salad
                 </Button>
-                <Button variant="contained" color="primary">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    productSortHandler(ProductCollection.DISH);
+                  }}
+                >
                   Dish
                 </Button>
               </div>
