@@ -18,6 +18,7 @@ import { serverApi } from "../../../lib/config";
 import { retrieveProducts } from "./selector";
 import { Product } from "../../../lib/types/product";
 import { createSelector } from "reselect";
+import { ProductCollection } from "../../../lib/data/enums/product.enum";
 
 //REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -40,7 +41,8 @@ const Products = () => {
         page: 1,
         limit: 8,
         order: "createdAt",
-        // productCollection: ProductCollection.DISH,
+        productCollection: ProductCollection.DISH,
+        search: "",
       })
       .then((data) => {
         console.log("products data:", data);
@@ -101,15 +103,19 @@ const Products = () => {
             </Stack>
             <Stack className="products-wrapper">
               {products.length !== 0 ? (
-                products.map((product, index) => {
+                products.map((product: Product) => {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
+                  const productSize =
+                    product.productCollection === "DRINK"
+                      ? product.productVolume + " L"
+                      : product.productSize + " SIZE";
                   return (
-                    <Stack key={index} className="product-card">
+                    <Stack key={product._id} className="product-card">
                       <Stack
                         className="product-img"
                         sx={{ backgroundImage: `url(${imagePath})` }}
                       >
-                        <div className="product-sale">Normal size</div>
+                        <div className="product-sale">{productSize}</div>
                         <Button className="shop-btn">
                           <img
                             src="/icons/shopping-cart.svg"
@@ -118,10 +124,14 @@ const Products = () => {
                           />
                         </Button>
                         <Button className="view-btn" sx={{ right: "36px" }}>
-                          <Badge badgeContent={20} color="secondary">
+                          <Badge
+                            badgeContent={product.productView}
+                            color="secondary"
+                          >
                             <RemoveRedEyeIcon
                               sx={{
-                                color: "gray",
+                                color:
+                                  product.productView === 0 ? "gray" : "white",
                               }}
                             />
                           </Badge>
@@ -134,7 +144,7 @@ const Products = () => {
                         </span>
                         <div className="product-desc">
                           <MonetizationOnIcon />
-                          {12}
+                          {product.productPrice}
                         </div>
                       </Box>
                     </Stack>
