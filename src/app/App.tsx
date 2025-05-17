@@ -28,10 +28,11 @@ function App() {
           ? { ...exist, quantity: exist.quantity + 1 }
           : item
       );
+      setCardItems(cardUpdate);
       localStorage.setItem("cardData", JSON.stringify(cardUpdate));
     } else {
       const cardUpdate = [...cardItems, { ...input }];
-      setCardItems(cardItems);
+      setCardItems(cardUpdate);
       localStorage.setItem("cardData", JSON.stringify(cardUpdate));
     }
   };

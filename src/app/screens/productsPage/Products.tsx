@@ -256,21 +256,24 @@ const Products = (props: ProductsProps) => {
                         sx={{ backgroundImage: `url(${imagePath})` }}
                       >
                         <div className="product-sale">{productSize}</div>
-                        <Button className="shop-btn">
+                        <Button
+                          className="shop-btn"
+                          onClick={(e) => {
+                            console.log("clicked");
+                            onAdd({
+                              _id: product._id,
+                              quantity: 1,
+                              name: product.productName,
+                              price: product.productPrice,
+                              image: product.productImages[0],
+                            });
+                            e.stopPropagation();
+                          }}
+                        >
                           <img
                             src="/icons/shopping-cart.svg"
                             style={{ display: "flex" }}
                             alt="Cart"
-                            onClick={(e) => {
-                              onAdd({
-                                _id: product._id,
-                                quantity: 1,
-                                name: product.productName,
-                                price: product.productPrice,
-                                image: product.productImages[0],
-                              });
-                              e.stopPropagation();
-                            }}
                           />
                         </Button>
                         <Button className="view-btn" sx={{ right: "36px" }}>
