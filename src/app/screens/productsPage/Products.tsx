@@ -35,6 +35,7 @@ interface ProductsProps {
   onAdd: (item: CardItem) => void;
 }
 const Products = (props: ProductsProps) => {
+  const { onAdd } = props;
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useSelector(productsRetriever);
   const [productSearch, setProductSearch] = useState({
@@ -260,6 +261,16 @@ const Products = (props: ProductsProps) => {
                             src="/icons/shopping-cart.svg"
                             style={{ display: "flex" }}
                             alt="Cart"
+                            onClick={(e) => {
+                              onAdd({
+                                _id: product._id,
+                                quantity: 1,
+                                name: product.productName,
+                                price: product.productPrice,
+                                image: product.productImages[0],
+                              });
+                              e.stopPropagation();
+                            }}
                           />
                         </Button>
                         <Button className="view-btn" sx={{ right: "36px" }}>
