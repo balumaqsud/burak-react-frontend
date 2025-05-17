@@ -21,6 +21,7 @@ import MemberService from "../../services/MemberService";
 import { useParams } from "react-router-dom";
 import { Member } from "../../../lib/types/member";
 import { serverApi } from "../../../lib/config";
+import { CardItem } from "../../../lib/types/search";
 
 //REDUX SLICE define
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -41,7 +42,11 @@ const chosenProductRetriever = createSelector(
   })
 );
 
-export default function ChosenProduct() {
+interface ChosenProductProps {
+  onAdd: (item: CardItem) => void;
+}
+
+export default function ChosenProduct(props: ChosenProductProps) {
   const { productId } = useParams<{ productId: string }>();
   console.log("here", productId);
   //slice call, sets the redux data

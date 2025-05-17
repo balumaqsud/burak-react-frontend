@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 import HomePage from "./screens/homePage";
 import UsersPage from "./screens/usersPage";
@@ -11,10 +11,31 @@ import HomeNavbar from "./components/headers/homeNavbar";
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
-import Test from "./Test";
+import { CardItem } from "../lib/types/search";
 
 function App() {
   const location = useLocation();
+  const cardJson: string | null = localStorage.getItem("cardData");
+  const currentCard = cardJson ? JSON.parse(cardJson) : [];
+  const [cardItems, setCardItems] = useState<CardItem[]>(currentCard);
+
+  //handlers
+  const onAdd = (input: CardItem) => {
+    const exist = cardItems.find((item: CardItem) => item._id === input._id);
+    if (exist) {
+      const cardUpdate = cardItems.map((item) =>
+        item._id === input._id
+          ? { ...exist, quantity: exist.quantity + 1 }
+          : item
+      );
+      localStorage.setItem("cardData", JSON.stringify(cardUpdate));
+    } else {
+      const cardUpdate = [...cardItems, { ...input }];
+      setCardItems(cardItems);
+      localStorage.setItem("cardData", JSON.stringify(cardUpdate));
+    }
+  };
+
   return (
     <>
       {location.pathname === "/" ? <HomeNavbar /> : <OtherNavbar />}
@@ -26,7 +47,7 @@ function App() {
           <UsersPage />
         </Route>
         <Route path="/products">
-          <ProductsPage />
+          <ProductsPage onAdd={onAdd} />
         </Route>
         <Route path="/help">
           <HelpPage />

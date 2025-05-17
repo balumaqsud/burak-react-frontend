@@ -20,6 +20,7 @@ import { Product, ProductInquiry } from "../../../lib/types/product";
 import { createSelector } from "reselect";
 import { ProductCollection } from "../../../lib/data/enums/product.enum";
 import { useHistory } from "react-router-dom";
+import { CardItem } from "../../../lib/types/search";
 
 //REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -30,7 +31,10 @@ const productsRetriever = createSelector(retrieveProducts, (products) => ({
   products,
 }));
 
-const Products = () => {
+interface ProductsProps {
+  onAdd: (item: CardItem) => void;
+}
+const Products = (props: ProductsProps) => {
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useSelector(productsRetriever);
   const [productSearch, setProductSearch] = useState({
