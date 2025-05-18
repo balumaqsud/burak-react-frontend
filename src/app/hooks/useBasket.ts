@@ -33,7 +33,7 @@ const useBasket = () => {
     );
 
     if (exist.quantity === 1) {
-      const cardUpdate = cardItems.filter((item) => item._id === input._id);
+      const cardUpdate = cardItems.filter((item) => item._id !== input._id);
       setCardItems(cardUpdate);
       localStorage.setItem("cardData", JSON.stringify(cardUpdate));
     } else {
@@ -46,10 +46,24 @@ const useBasket = () => {
       localStorage.setItem("cardData", JSON.stringify(cardUpdate));
     }
   };
+  const onDelete = (input: CardItem) => {
+    const cardUpdate = cardItems.filter(
+      (item: CardItem) => item._id !== input._id
+    );
+    setCardItems(cardUpdate);
+    localStorage.setItem("cardData", JSON.stringify(cardUpdate));
+  };
+  const onDeleteAll = () => {
+    setCardItems([]);
+    localStorage.removeItem("cardData");
+  };
 
   return {
     cardItems,
     onAdd,
+    onDelete,
+    onRemove,
+    onDeleteAll,
   };
 };
 

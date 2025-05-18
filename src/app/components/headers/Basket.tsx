@@ -11,15 +11,24 @@ import { serverApi } from "../../../lib/config";
 
 interface BasketProps {
   cardItems: CardItem[];
+  onAdd: (item: CardItem) => void;
+  onDelete: (item: CardItem) => void;
+  onRemove: (item: CardItem) => void;
+  onDeleteAll: () => void;
 }
 
 export default function Basket(props: BasketProps) {
-  const { cardItems } = props;
+  const { cardItems, onAdd, onDelete, onDeleteAll, onRemove } = props;
   const authMember = null;
   const history = useHistory();
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const itemsPrice: number = cardItems.reduce(
+    (a: number, c: CardItem) => a + c.price * c.quantity,
+    0
+  );
+  const shippingCost: number = itemsPrice <= 100 ? 5 : 0;
+  const totalPrice = (itemsPrice + shippingCost).toFixed(2);
 
   /** HANDLERS **/
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -83,7 +92,10 @@ export default function Basket(props: BasketProps) {
             {cardItems.length === 0 ? (
               <div>Cart is empty!</div>
             ) : (
-              <div>Card Products</div>
+              <Stack className="basket_all">
+                <div>Card products</div>
+                <Button onClick={() => onDeleteAll()}>Clear All</Button>
+              </Stack>
             )}
           </Box>
           <Box className={"orders-main-wrapper"}>
@@ -94,7 +106,13 @@ export default function Basket(props: BasketProps) {
                 return (
                   <Box className={"basket-info-box"}>
                     <div className={"cancel-btn"}>
-                      <CancelIcon color={"primary"} />
+                      <CancelIcon
+                        color={"primary"}
+                        onClick={() => {
+                          console.log("clicked");
+                          onDelete(item);
+                        }}
+                      />
                     </div>
                     <img
                       alt="fresh"
@@ -107,8 +125,24 @@ export default function Basket(props: BasketProps) {
                     </p>
                     <Box sx={{ minWidth: 120 }}>
                       <div className="col-2">
-                        <button className="remove">-</button>{" "}
-                        <button className="add">+</button>
+                        <button
+                          className="remove"
+                          onClick={() => {
+                            console.log("clicked");
+                            onRemove(item);
+                          }}
+                        >
+                          -
+                        </button>{" "}
+                        <button
+                          className="add"
+                          onClick={() => {
+                            console.log("clicked");
+                            onAdd(item);
+                          }}
+                        >
+                          +
+                        </button>
                       </div>
                     </Box>
                   </Box>
@@ -116,12 +150,16 @@ export default function Basket(props: BasketProps) {
               })}
             </Box>
           </Box>
-          <Box className={"basket-order"}>
-            <span className={"price"}>Total: ${} (98 +2)</span>
-            <Button startIcon={<ShoppingCartIcon />} variant={"contained"}>
-              Order
-            </Button>
-          </Box>
+          {cardItems.length !== 0 ? (
+            <Box className={"basket-order"}>
+              <span className={"price"}>
+                Total: ${totalPrice}: ${itemsPrice} + ${shippingCost}
+              </span>
+              <Button startIcon={<ShoppingCartIcon />} variant={"contained"}>
+                Order
+              </Button>
+            </Box>
+          ) : null}
         </Stack>
       </Menu>
     </Box>

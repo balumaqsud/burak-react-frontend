@@ -16,14 +16,26 @@ import useBasket from "./hooks/useBasket";
 
 function App() {
   const location = useLocation();
-  const { cardItems, onAdd } = useBasket();
+  const { cardItems, onAdd, onDelete, onRemove, onDeleteAll } = useBasket();
 
   return (
     <>
       {location.pathname === "/" ? (
-        <HomeNavbar cardItems={cardItems} />
+        <HomeNavbar
+          cardItems={cardItems}
+          onAdd={onAdd}
+          onDelete={onDelete}
+          onRemove={onRemove}
+          onDeleteAll={onDeleteAll}
+        />
       ) : (
-        <OtherNavbar cardItems={cardItems} />
+        <OtherNavbar
+          cardItems={cardItems}
+          onAdd={onAdd}
+          onDelete={onDelete}
+          onRemove={onRemove}
+          onDeleteAll={onDeleteAll}
+        />
       )}
       <Switch>
         <Route path="/orders">

@@ -47,6 +47,7 @@ interface ChosenProductProps {
 }
 
 export default function ChosenProduct(props: ChosenProductProps) {
+  const { onAdd } = props;
   const { productId } = useParams<{ productId: string }>();
   console.log("here", productId);
   //slice call, sets the redux data
@@ -75,6 +76,8 @@ export default function ChosenProduct(props: ChosenProductProps) {
   const { restaurant } = useSelector(restaurantRetriever);
   const { chosenProduct } = useSelector(chosenProductRetriever);
   console.log(restaurant);
+
+  if (!chosenProduct) return null;
 
   return (
     <div className={"chosen-product"}>
@@ -125,7 +128,21 @@ export default function ChosenProduct(props: ChosenProductProps) {
               <span>${chosenProduct?.productPrice}</span>
             </div>
             <div className={"button-box"}>
-              <Button variant="contained">Add To Basket</Button>
+              <Button
+                variant="contained"
+                onClick={(e) => {
+                  onAdd({
+                    _id: chosenProduct._id,
+                    quantity: 1,
+                    name: chosenProduct.productName,
+                    price: chosenProduct.productPrice,
+                    image: chosenProduct.productImages[0],
+                  });
+                  e.stopPropagation();
+                }}
+              >
+                Add To Basket
+              </Button>
             </div>
           </Box>
         </Stack>

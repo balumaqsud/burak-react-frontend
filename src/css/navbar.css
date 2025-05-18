@@ -326,6 +326,14 @@
   border-top: 1px solid rgba(0, 0, 0, 0.5);
 }
 
+.basket-frame .basket_all {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 .basket-order .price {
   width: 200px;
   display: flex;
