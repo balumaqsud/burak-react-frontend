@@ -10,21 +10,21 @@ interface HomeNavbarProps {
   onDelete: (item: CardItem) => void;
   onRemove: (item: CardItem) => void;
   onDeleteAll: () => void;
+  setSignupOpen: (open: boolean) => void;
+  setLoginOpen: (open: boolean) => void;
 }
 export default function HomeNavbar(props: HomeNavbarProps) {
-  const { cardItems, onAdd, onDelete, onDeleteAll, onRemove } = props;
+  const {
+    cardItems,
+    onAdd,
+    onDelete,
+    onDeleteAll,
+    onRemove,
+    setLoginOpen,
+    setSignupOpen,
+  } = props;
   const authMember = null;
-  const [count, setCount] = useState<number>(0);
-  const [value, setValue] = useState<boolean>(true);
 
-  useEffect(() => {
-    console.log("component did Mount"); //used for data fetching
-    setCount(count + 1);
-  }, [value]);
-
-  function buttonClick() {
-    setValue(!value);
-  }
   return (
     <div className="home-navbar">
       <Container className="navbar-container">
@@ -77,7 +77,11 @@ export default function HomeNavbar(props: HomeNavbarProps) {
             />
             {!authMember ? (
               <Box>
-                <Button variant="contained" className="login-button">
+                <Button
+                  variant="contained"
+                  className="login-button"
+                  onClick={() => setLoginOpen(true)}
+                >
                   Login
                 </Button>
               </Box>
@@ -97,13 +101,13 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               World's Most Delicious Cousine
             </Box>
             <Box className={"wel-txt"}>The Choice, not just a choice</Box>
-            <Box className={"service-txt"}>{count} hours service</Box>
+            <Box className={"service-txt"}>24 hours service</Box>
             <Box className={"signup"}>
               {!authMember ? (
                 <Button
                   variant={"contained"}
                   className={"signup-button"}
-                  onClick={buttonClick}
+                  onClick={() => setSignupOpen(true)}
                 >
                   Sign up
                 </Button>
