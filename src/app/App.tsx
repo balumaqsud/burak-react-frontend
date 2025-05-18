@@ -6,17 +6,18 @@ import ProductsPage from "./screens/productsPage";
 import HelpPage from "./screens/helpPage";
 import OrdersPage from "./screens/ordersPage";
 import Footer from "./components/footer";
-import OtherNavbar from "./components/headers/otherNavbar";
 import HomeNavbar from "./components/headers/homeNavbar";
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
 import { CardItem } from "../lib/types/search";
+import OtherNavbar from "./components/headers/otherNavbar";
 
 function App() {
   const location = useLocation();
   const cardJson: string | null = localStorage.getItem("cardData");
   const currentCard = cardJson ? JSON.parse(cardJson) : [];
+  console.log(currentCard);
   const [cardItems, setCardItems] = useState<CardItem[]>(currentCard);
 
   //handlers
@@ -39,7 +40,11 @@ function App() {
 
   return (
     <>
-      {location.pathname === "/" ? <HomeNavbar /> : <OtherNavbar />}
+      {location.pathname === "/" ? (
+        <HomeNavbar cardItems={cardItems} />
+      ) : (
+        <OtherNavbar cardItems={cardItems} />
+      )}
       <Switch>
         <Route path="/orders">
           <OrdersPage />
