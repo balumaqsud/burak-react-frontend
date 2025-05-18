@@ -6,6 +6,7 @@ import Fade from "@material-ui/core/Fade";
 import { Fab, Stack, TextField } from "@mui/material";
 import styled from "styled-components";
 import LoginIcon from "@mui/icons-material/Login";
+import { T } from "../../../lib/types/common";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -40,8 +41,20 @@ interface AuthenticationModalProps {
 export default function AuthenticationModal(props: AuthenticationModalProps) {
   const { signupOpen, loginOpen, handleSignupClose, handleLoginClose } = props;
   const classes = useStyles();
+  const [memberNick, setMemberNick] = useState<string>("");
+  const [memberPhone, setMemberPhone] = useState<string>("");
+  const [memberPassword, setMemberPassword] = useState<string>("");
 
   /** HANDLERS **/
+  const usernameHandler = (e: T) => {
+    setMemberNick(e.target.value);
+  };
+  const phoneNumberHandler = (e: T) => {
+    setMemberPhone(e.target.value);
+  };
+  const passwordHandler = (e: T) => {
+    setMemberPassword(e.target.value);
+  };
 
   return (
     <div>
@@ -71,18 +84,21 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 id="outlined-basic"
                 label="username"
                 variant="outlined"
+                onChange={usernameHandler}
               />
               <TextField
                 sx={{ width: "100%", my: "17px" }}
                 id="outlined-basic"
                 label="phone number"
                 variant="outlined"
+                onChange={phoneNumberHandler}
               />
               <TextField
                 id="outlined-basic"
                 label="password"
                 variant="outlined"
                 sx={{ width: "100%" }}
+                onChange={passwordHandler}
               />
               <Fab
                 sx={{ marginTop: "30px", width: "100%", marginBottom: "20px" }}
