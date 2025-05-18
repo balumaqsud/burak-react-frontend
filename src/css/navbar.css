@@ -324,6 +324,7 @@
   justify-content: space-evenly;
   align-items: center;
   border-top: 1px solid rgba(0, 0, 0, 0.5);
+  font-size: 16px;
 }
 
 .basket-frame .basket_all {
@@ -340,8 +341,8 @@
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 16px;
+  line-height: 20px;
   color: #000000;
 }
 
