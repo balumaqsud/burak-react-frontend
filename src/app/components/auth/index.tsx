@@ -7,6 +7,9 @@ import { Fab, Stack, TextField } from "@mui/material";
 import styled from "styled-components";
 import LoginIcon from "@mui/icons-material/Login";
 import { T } from "../../../lib/types/common";
+import { Messages } from "../../../lib/config";
+import { MemberInput } from "../../../lib/types/member";
+import MemberService from "../../services/MemberService";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -55,7 +58,24 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const passwordHandler = (e: T) => {
     setMemberPassword(e.target.value);
   };
+  const signupRequestHandler = async () => {
+    try {
+      const match =
+        memberNick !== "" && memberPhone !== "" && memberPassword !== "";
+      if (!match) throw new Error(Messages.error3);
 
+      const signupInput: MemberInput = {
+        memberNick: memberNick,
+        memberPhone: memberPhone,
+        memberPassword: memberPassword,
+      };
+
+      const member = new MemberService();
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
   return (
     <div>
       <Modal
@@ -104,6 +124,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 sx={{ marginTop: "30px", width: "100%", marginBottom: "20px" }}
                 variant="extended"
                 color="primary"
+                onClick={signupRequestHandler}
               >
                 <LoginIcon sx={{ mr: 1 }} />
                 Signup
