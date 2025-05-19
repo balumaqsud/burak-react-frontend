@@ -12,7 +12,7 @@ const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       ? JSON.parse(localStorage.getItem("memberData") as string)
       : null
   );
-
+  console.log("verify");
   return (
     <GlobalContext.Provider value={{ authMember, setAuthMember }}>
       {children}
