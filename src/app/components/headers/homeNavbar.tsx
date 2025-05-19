@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
 import { useEffect, useState } from "react";
 import { CardItem } from "../../../lib/types/search";
+import { useGlobals } from "../../hooks/useGlobals";
 
 interface HomeNavbarProps {
   cardItems: CardItem[];
@@ -23,7 +24,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
     setLoginOpen,
     setSignupOpen,
   } = props;
-  const authMember = null;
+  const { authMember } = useGlobals();
 
   return (
     <div className="home-navbar">

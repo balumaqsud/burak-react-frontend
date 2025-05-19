@@ -2,6 +2,7 @@ import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
 import { CardItem } from "../../../lib/types/search";
+import { useGlobals } from "../../hooks/useGlobals";
 
 interface OtherNavbarProps {
   cardItems: CardItem[];
@@ -23,7 +24,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
     setLoginOpen,
     setSignupOpen,
   } = props;
-  const authMember = null;
+  const { authMember } = useGlobals();
 
   return (
     <div className="other-navbar">
