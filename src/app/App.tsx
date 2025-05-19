@@ -10,6 +10,7 @@ import HomeNavbar from "./components/headers/homeNavbar";
 import OtherNavbar from "./components/headers/otherNavbar";
 import useBasket from "./hooks/useBasket";
 import AuthenticationModal from "./components/auth/index";
+
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
