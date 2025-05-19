@@ -64,7 +64,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
     if (e.key === "Enter" && signupOpen) {
       signupRequestHandler().then();
     } else if (e.key === "Enter" && loginOpen) {
-      //here
+      loginRequestHandler().then();
     }
   };
   const signupRequestHandler = async () => {
@@ -81,6 +81,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
 
       const member = new MemberService();
       const res = await member.signup(signupInput);
+      //here
       handleSignupClose();
     } catch (error) {
       console.log(error);
@@ -101,6 +102,8 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
 
       const member = new MemberService();
       const res = await member.login(loginInput);
+
+      //here
       handleLoginClose();
     } catch (error) {
       console.log(error);
@@ -198,6 +201,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 label="username"
                 variant="outlined"
                 sx={{ my: "10px", width: "100%" }}
+                onChange={usernameHandler}
               />
               <TextField
                 id={"outlined-basic"}
@@ -205,13 +209,14 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 variant={"outlined"}
                 type={"password"}
                 sx={{ width: "100%" }}
+                onChange={passwordHandler}
+                onKeyDown={handlePasswordKeyDown}
               />
               <Fab
                 sx={{ marginTop: "27px", width: "100%", marginBottom: "20px" }}
                 variant={"extended"}
                 color={"primary"}
                 onClick={loginRequestHandler}
-                onKeyDown={handlePasswordKeyDown}
               >
                 <LoginIcon sx={{ mr: 1 }} />
                 Login

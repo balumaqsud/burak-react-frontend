@@ -47,14 +47,14 @@ class MemberService {
   }
   public async login(input: LoginInput): Promise<Member> {
     try {
-      let url = `${this.path}/member/signup`;
+      let url = `${this.path}/member/login`;
       const result = await axios.post(url, input, { withCredentials: true });
       console.log("signup", result.data);
       const member: Member = result.data.member;
       localStorage.setItem("memberData", JSON.stringify(member));
       return member;
     } catch (error) {
-      console.log("error, signup", error);
+      console.log("error, login", error);
       throw error;
     }
   }
