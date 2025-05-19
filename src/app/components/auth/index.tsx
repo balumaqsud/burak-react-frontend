@@ -10,6 +10,7 @@ import { T } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
 import { MemberInput } from "../../../lib/types/member";
 import MemberService from "../../services/MemberService";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -58,6 +59,12 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const passwordHandler = (e: T) => {
     setMemberPassword(e.target.value);
   };
+
+  const handlePasswordKeyDown = (e: T) => {
+    if (e.key === "Enter" && signupOpen) {
+      signupRequestHandler().then();
+    }
+  };
   const signupRequestHandler = async () => {
     try {
       const match =
@@ -71,9 +78,12 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       };
 
       const member = new MemberService();
+      const res = await member.signup(signupInput);
+      handleSignupClose();
     } catch (error) {
       console.log(error);
-      throw error;
+      sweetErrorHandling(error).then();
+      handleSignupClose();
     }
   };
   return (
@@ -125,6 +135,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 variant="extended"
                 color="primary"
                 onClick={signupRequestHandler}
+                onKeyDown={handlePasswordKeyDown}
               >
                 <LoginIcon sx={{ mr: 1 }} />
                 Signup
