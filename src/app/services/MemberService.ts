@@ -61,9 +61,10 @@ class MemberService {
   public async logout(): Promise<boolean> {
     try {
       let url = `${this.path}/member/logout`;
-      const result = await axios.post(url, { withCredentials: true });
+      const result = await axios.post(url, {}, { withCredentials: true });
 
       localStorage.removeItem("memberData");
+      console.log("logout", result.data.logout);
       return result.data.logout;
     } catch (error) {
       console.log("error, login", error);
