@@ -33,9 +33,9 @@ export interface LoginInput {
 }
 
 export interface MemberUpdateInput {
-  memberNick: string;
+  memberNick?: string;
   memberPassword?: string;
-  memberPhone: string;
+  memberPhone?: string;
   memberAddress?: string;
   memberImage?: string;
   memberDescription?: string;
