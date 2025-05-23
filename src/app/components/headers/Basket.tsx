@@ -7,7 +7,10 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useHistory } from "react-router-dom";
 import { CardItem } from "../../../lib/types/search";
-import { serverApi } from "../../../lib/config";
+import { Messages, serverApi } from "../../../lib/config";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import OrderService from "../../services/OrderService";
+import { useGlobals } from "../../hooks/useGlobals";
 
 interface BasketProps {
   cardItems: CardItem[];
@@ -19,7 +22,7 @@ interface BasketProps {
 
 export default function Basket(props: BasketProps) {
   const { cardItems, onAdd, onDelete, onDeleteAll, onRemove } = props;
-  const authMember = null;
+  const authMember = useGlobals();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -36,6 +39,22 @@ export default function Basket(props: BasketProps) {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const orderProcessHandler = async () => {
+    try {
+      handleClose();
+
+      if (!authMember) throw new Error(Messages.error2);
+
+      const order = new OrderService();
+      await order.createOrder(cardItems);
+      onDeleteAll();
+      history.push("/orders");
+    } catch (error) {
+      console.log(error);
+      sweetErrorHandling(error).then();
+    }
   };
 
   return (
@@ -155,7 +174,11 @@ export default function Basket(props: BasketProps) {
               <span className={"price"}>
                 Total: ${totalPrice}: ${itemsPrice} + ${shippingCost}
               </span>
-              <Button startIcon={<ShoppingCartIcon />} variant={"contained"}>
+              <Button
+                startIcon={<ShoppingCartIcon />}
+                variant={"contained"}
+                onClick={orderProcessHandler}
+              >
                 Order
               </Button>
             </Box>
