@@ -84,7 +84,7 @@ class MemberService {
       formData.append("memberPhone", input.memberPhone || "");
       formData.append("memberAddress", input.memberAddress || "");
       formData.append("memberDescription", input.memberDescription || "");
-      formData.append("memberNick", input.memberImage || "");
+      formData.append("memberImage", input.memberImage || "");
 
       const result = await axios(`${this.path}/member/update`, {
         method: "POST",
