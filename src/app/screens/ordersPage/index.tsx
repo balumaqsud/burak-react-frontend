@@ -8,14 +8,13 @@ import PausedOrders from "./PausedOrders";
 import FinishedOrders from "./FinishedOrders";
 import ProcessOrders from "./ProcessOrders";
 import { setPausedOrders, setProcessOrders, setFinishedOrders } from "./slice";
-import "../../../css/order.css";
 import { Dispatch } from "@reduxjs/toolkit";
 import { Order, OrderInquiry } from "../../../lib/types/order";
 import { useDispatch } from "react-redux";
 import { OrderStatus } from "../../../lib/data/enums/order.enum";
 import OrderService from "../../services/OrderService";
 import { useGlobals } from "../../hooks/useGlobals";
-
+import "../../../css/order.css";
 //REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
   setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
