@@ -22,7 +22,7 @@ interface BasketProps {
 
 export default function Basket(props: BasketProps) {
   const { cardItems, onAdd, onDelete, onDeleteAll, onRemove } = props;
-  const authMember = useGlobals();
+  const { authMember, setOrderBuilder } = useGlobals();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -50,6 +50,7 @@ export default function Basket(props: BasketProps) {
       const order = new OrderService();
       await order.createOrder(cardItems);
       onDeleteAll();
+      setOrderBuilder(new Date());
       history.push("/orders");
     } catch (error) {
       console.log(error);

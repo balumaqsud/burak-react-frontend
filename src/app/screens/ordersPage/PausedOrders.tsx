@@ -24,7 +24,7 @@ const pausedOrdersRetriever = createSelector(
 
 const PausedOrders = () => {
   const { pausedOrders } = useSelector(pausedOrdersRetriever);
-  const { authMember } = useGlobals();
+  const { authMember, setOrderBuilder } = useGlobals();
   console.log("this", pausedOrders);
 
   //hanlders
@@ -43,6 +43,7 @@ const PausedOrders = () => {
         const order = new OrderService();
         await order.updateOrder(input);
         //rebuild logic
+        setOrderBuilder(new Date());
       }
     } catch (error) {
       console.log(error);

@@ -14,6 +14,7 @@ import { Order, OrderInquiry } from "../../../lib/types/order";
 import { useDispatch } from "react-redux";
 import { OrderStatus } from "../../../lib/data/enums/order.enum";
 import OrderService from "../../services/OrderService";
+import { useGlobals } from "../../hooks/useGlobals";
 
 //REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -26,7 +27,7 @@ const OrdersPage = () => {
   //calling action dispatch
   const { setPausedOrders, setProcessOrders, setFinishedOrders } =
     actionDispatch(useDispatch());
-
+  const { orderBuilder } = useGlobals();
   const [value, setValue] = useState("1");
   const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
     page: 1,
@@ -51,7 +52,7 @@ const OrdersPage = () => {
       .getOrders({ ...orderInquiry, orderStatus: OrderStatus.FINISH })
       .then((data) => setFinishedOrders(data))
       .catch((err) => console.log(err));
-  });
+  }, [orderInquiry, orderBuilder]);
 
   const handleChange = (e: SyntheticEvent, newValue: string) => {
     setValue(newValue);
