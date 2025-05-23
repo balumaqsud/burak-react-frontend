@@ -4,53 +4,41 @@ import { Box, Button, Stack } from "@mui/material";
 import moment from "moment";
 
 //for redux
-import { useSelector } from "react-redux";
-import { createSelector } from "reselect";
-import { retrievePausedOrders } from "./selector";
-import { Product } from "../../../lib/types/product";
-import { serverApi } from "../../../lib/config";
-import { Order, OrderItem } from "../../../lib/types/order";
+// import { useSelector } from "react-redux";
+// import { createSelector } from "reselect";
+// import { retrieve } from "./selector";
+// import { Product } from "../../../lib/types/product";
+// import { serverApi } from "../../../lib/config";
 
-const pausedOrdersRetriever = createSelector(
-  retrievePausedOrders,
-  (pausedOrders) => ({
-    pausedOrders,
-  })
-);
+// const popularDishesRetriever = createSelector(
+//   retrievePopularDishes,
+//   (popularDishes) => ({ popularDishes })
+// );
 
 const ProcessOrders = () => {
-  const { pausedOrders } = useSelector(pausedOrdersRetriever);
-  console.log("this", pausedOrders);
+  const example_arr: any[] = [1, 2];
   return (
     <TabPanel value="2">
       <Stack>
-        {pausedOrders?.map((order: Order) => {
+        {example_arr.map((ele, index) => {
           return (
-            <Box key={order._id} className="order-main-box">
+            <Box key={index} className="order-main-box">
               <Box className="order-box-scroll">
-                {order?.orderItems?.map((item: OrderItem) => {
-                  //
-                  const product: Product = order.productData.filter(
-                    (ele: Product) => item.productId === ele._id
-                  )[0];
-                  const imagePath = `${serverApi}/${product.productImages[0]}`;
-                  //
+                {example_arr.map((ele2, index2) => {
                   return (
-                    <Box key={item._id} className="orders-name-price">
+                    <Box key={index2} className="orders-name-price">
                       <img
-                        src={imagePath}
+                        src="/img/kebab.webp"
                         className="order-dish-img"
                         alt="dish"
                       />
-                      <div className="dish-title">{product.productName}</div>
+                      <div className="dish-title">Kebab</div>
                       <Box className="price-box">
-                        <p>${item.itemPrice}</p>
+                        <p>$11</p>
                         <img src="/icons/close.svg" alt="close" />
-                        <p>{item.itemQuantity}</p>
+                        <p>2</p>
                         <img src="/icons/pause.svg" alt="pause" />
-                        <p style={{ marginLeft: "15px" }}>
-                          ${item.itemQuantity * item.itemPrice}
-                        </p>
+                        <p style={{ marginLeft: "15px" }}>$22</p>
                       </Box>
                     </Box>
                   );
@@ -58,13 +46,13 @@ const ProcessOrders = () => {
               </Box>
               <Box className="total-price">
                 <p>Product Price</p>
-                <p>${order.orderTotal - order.orderDelivery}</p>
+                <p>$44</p>
                 <img src="/icons/plus.svg" alt="plus" />
                 <p>Delivery Cost</p>
-                <p>${order.orderDelivery}</p>
+                <p>$5</p>
                 <img src="/icons/pause.svg" alt="pause" />
                 <p>Total</p>
-                <p>${order.orderTotal}</p>
+                <p>$49</p>
                 <div className="moment">{moment().format("lll")}</div>
                 <Box className="process-button">
                   <Button className="fulfill-button">Verify Fulfillment</Button>
@@ -73,20 +61,15 @@ const ProcessOrders = () => {
             </Box>
           );
         })}
-        {!pausedOrders ||
-          (pausedOrders.length === 0 && (
-            <Box
-              display={"flex"}
-              flexDirection={"row"}
-              justifyContent={"center"}
-            >
-              <img
-                src={"/icons/noimage-list.svg"}
-                style={{ width: 300, height: 300 }}
-                alt=""
-              />
-            </Box>
-          ))}
+        {false && (
+          <Box display={"flex"} flexDirection={"row"} justifyContent={"center"}>
+            <img
+              src={"/icons/noimage-list.svg"}
+              style={{ width: 300, height: 300 }}
+              alt=""
+            />
+          </Box>
+        )}
       </Stack>
     </TabPanel>
   );
