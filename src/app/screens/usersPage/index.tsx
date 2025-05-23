@@ -4,9 +4,15 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Settings } from "./Settings";
+import { useHistory } from "react-router-dom";
+import { useGlobals } from "../../hooks/useGlobals";
+
 import "../../../css/userPage.css";
 
 export default function UserPage() {
+  const { authMember } = useGlobals();
+  const history = useHistory();
+  if (!authMember) history.push("/");
   return (
     <div className={"user-page"}>
       <Container>

@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { OrderStatus } from "../../../lib/data/enums/order.enum";
 import OrderService from "../../services/OrderService";
 import { useGlobals } from "../../hooks/useGlobals";
+import { useHistory } from "react-router-dom";
 import "../../../css/order.css";
 //REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -23,6 +24,9 @@ const actionDispatch = (dispatch: Dispatch) => ({
 });
 
 const OrdersPage = () => {
+  const { authMember } = useGlobals();
+  const history = useHistory();
+  if (!authMember) history.push("/");
   //calling action dispatch
   const { setPausedOrders, setProcessOrders, setFinishedOrders } =
     actionDispatch(useDispatch());
