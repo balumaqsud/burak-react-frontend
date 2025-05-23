@@ -7,8 +7,13 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrievePausedOrders } from "./selector";
 import { Product } from "../../../lib/types/product";
-import { serverApi } from "../../../lib/config";
-import { Order, OrderItem } from "../../../lib/types/order";
+import { Messages, serverApi } from "../../../lib/config";
+import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { T } from "../../../lib/types/common";
+import { OrderStatus } from "../../../lib/data/enums/order.enum";
+import { useGlobals } from "../../hooks/useGlobals";
+import OrderService from "../../services/OrderService";
 
 const pausedOrdersRetriever = createSelector(
   retrievePausedOrders,
@@ -19,9 +24,32 @@ const pausedOrdersRetriever = createSelector(
 
 const PausedOrders = () => {
   const { pausedOrders } = useSelector(pausedOrdersRetriever);
+  const { authMember } = useGlobals();
   console.log("this", pausedOrders);
 
-  //
+  //hanlders
+  const deleteHandler = async (e: T) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
+      const orderId = e.target.value;
+      const input: OrderUpdateInput = {
+        orderId: orderId,
+        orderStatus: OrderStatus.DELETE,
+      };
+
+      const confirm = window.confirm("wanna delete");
+
+      if (confirm) {
+        const order = new OrderService();
+        await order.updateOrder(input);
+        //rebuild logic
+      }
+    } catch (error) {
+      console.log(error);
+      sweetErrorHandling(error).then();
+    }
+  };
+
   return (
     <TabPanel value="1">
       <Stack>
@@ -69,7 +97,13 @@ const PausedOrders = () => {
                 <p>Total</p>
                 <p>${order.orderTotal}</p>
                 <Box className="buttons">
-                  <Button className="cancel-button">Cancel</Button>
+                  <Button
+                    value={order._id}
+                    className="cancel-button"
+                    onClick={deleteHandler}
+                  >
+                    Cancel
+                  </Button>
                   <Button className="payment-button">Payment</Button>
                 </Box>
               </Box>
