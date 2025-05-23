@@ -21,7 +21,7 @@ export interface Order {
   updatedAt: Date;
   // items
   orderItems: OrderItem[];
-  products: Product[];
+  productData: Product[];
 }
 
 export interface OrderItemInput {
