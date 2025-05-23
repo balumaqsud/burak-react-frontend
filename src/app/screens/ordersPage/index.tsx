@@ -16,6 +16,7 @@ import OrderService from "../../services/OrderService";
 import { useGlobals } from "../../hooks/useGlobals";
 import { useHistory } from "react-router-dom";
 import "../../../css/order.css";
+import { MemberStatus, MemberType } from "../../../lib/data/enums/member.enum";
 //REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
   setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
@@ -91,24 +92,38 @@ const OrdersPage = () => {
             <Box className="member-box">
               <div className="user-image">
                 <img
-                  src={"/icons/default-user.svg"}
+                  src={
+                    authMember?.memberImage
+                      ? authMember.memberImage
+                      : "/icons/default-user.svg"
+                  }
                   alt=""
                   className={"order-user-avatar"}
                 />
                 <div className="order-user-icon-box">
                   <img
-                    src={"/icons/user-badge.svg"}
+                    src={
+                      authMember?.memberType === MemberType.RESTAURANT
+                        ? "/icons/restaurant.svg"
+                        : "/icons/user-badge.svg"
+                    }
                     alt=""
                     className={"order-user-prof-img"}
                   />
                 </div>
               </div>
-              <Typography className="user-name">Oliver</Typography>
-              <p className="user-type">USER</p>
+              <Typography className="user-name">
+                {authMember?.memberNick}
+              </Typography>
+              <p className="user-type">{authMember?.memberType}</p>
               <div className="line"></div>
               <div className="location">
                 <LocationOnIcon />
-                <p>Yeosu, South Korea</p>
+                <p>
+                  {authMember?.memberAddress
+                    ? authMember?.memberAddress
+                    : "no address"}
+                </p>
               </div>
             </Box>
           </Box>
