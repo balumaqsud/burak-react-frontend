@@ -8,8 +8,13 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrieveProcessOrders } from "./selector";
 import { Product } from "../../../lib/types/product";
-import { serverApi } from "../../../lib/config";
-import { Order } from "../../../lib/types/order";
+import { Messages, serverApi } from "../../../lib/config";
+import { Order, OrderUpdateInput } from "../../../lib/types/order";
+import { useGlobals } from "../../hooks/useGlobals";
+import { T } from "../../../lib/types/common";
+import { OrderStatus } from "../../../lib/data/enums/order.enum";
+import OrderService from "../../services/OrderService";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
 
 const processOrdersRetriever = createSelector(
   retrieveProcessOrders,
@@ -18,8 +23,39 @@ const processOrdersRetriever = createSelector(
   })
 );
 
-const ProcessOrders = () => {
+interface ProcessProps {
+  setValue: (input: string) => void;
+}
+
+const ProcessOrders = (props: ProcessProps) => {
+  const { setValue } = props;
+  const { authMember, setOrderBuilder } = useGlobals();
   const { processOrders } = useSelector(processOrdersRetriever);
+
+  //handlers
+  const finishHandler = async (e: T) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
+      const orderId = e.target.value;
+      const input: OrderUpdateInput = {
+        orderId: orderId,
+        orderStatus: OrderStatus.FINISH,
+      };
+
+      const confirm = window.confirm("you got it?");
+
+      if (confirm) {
+        const order = new OrderService();
+        await order.updateOrder(input);
+        //rebuild logic
+        setValue("3");
+        setOrderBuilder(new Date());
+      }
+    } catch (error) {
+      console.log(error);
+      sweetErrorHandling(error).then();
+    }
+  };
 
   return (
     <TabPanel value="2">
@@ -67,7 +103,13 @@ const ProcessOrders = () => {
                 <p>${order.orderTotal}</p>
                 <div className="moment">{moment().format("lll")}</div>
                 <Box className="process-button">
-                  <Button className="fulfill-button">Verify Fulfillment</Button>
+                  <Button
+                    value={order._id}
+                    className="fulfill-button"
+                    onClick={finishHandler}
+                  >
+                    Verify Fulfillment
+                  </Button>
                 </Box>
               </Box>
             </Box>

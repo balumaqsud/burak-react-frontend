@@ -77,8 +77,8 @@ const OrdersPage = () => {
               </Box>
             </Box>
             <Stack className="order-main-content">
-              <PausedOrders />
-              <ProcessOrders />
+              <PausedOrders setValue={setValue} />
+              <ProcessOrders setValue={setValue} />
               <FinishedOrders />
             </Stack>
           </TabContext>

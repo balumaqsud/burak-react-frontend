@@ -22,7 +22,12 @@ const pausedOrdersRetriever = createSelector(
   })
 );
 
-const PausedOrders = () => {
+interface PausedProps {
+  setValue: (input: string) => void;
+}
+
+const PausedOrders = (props: PausedProps) => {
+  const { setValue } = props;
   const { pausedOrders } = useSelector(pausedOrdersRetriever);
   const { authMember, setOrderBuilder } = useGlobals();
   console.log("this", pausedOrders);
@@ -43,6 +48,30 @@ const PausedOrders = () => {
         const order = new OrderService();
         await order.updateOrder(input);
         //rebuild logic
+        setOrderBuilder(new Date());
+      }
+    } catch (error) {
+      console.log(error);
+      sweetErrorHandling(error).then();
+    }
+  };
+
+  const processHandler = async (e: T) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
+      const orderId = e.target.value;
+      const input: OrderUpdateInput = {
+        orderId: orderId,
+        orderStatus: OrderStatus.PROCESS,
+      };
+
+      const confirm = window.confirm("wanna proceed");
+
+      if (confirm) {
+        const order = new OrderService();
+        await order.updateOrder(input);
+        //rebuild logic
+        setValue("2");
         setOrderBuilder(new Date());
       }
     } catch (error) {
@@ -105,7 +134,13 @@ const PausedOrders = () => {
                   >
                     Cancel
                   </Button>
-                  <Button className="payment-button">Payment</Button>
+                  <Button
+                    value={order._id}
+                    className="payment-button"
+                    onClick={processHandler}
+                  >
+                    Payment
+                  </Button>
                 </Box>
               </Box>
             </Box>
